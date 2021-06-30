@@ -1,3 +1,31 @@
+____________________________
+z komponentu Pagination
+____________________________
+import React from "react";
+const Pagination = ({ nextPage, prevPage, goToPage, pages }) => {
+  let pageButtons = [];
+  for (let i = 1; i <= pages; i++) {
+    pageButtons.push(
+      <button key={i} onClick={() => goToPage(i)}>
+        {i}
+      </button>
+    );
+  }
+  return (
+    <div>
+      {prevPage && <button onClick={prevPage}>Previous</button>}
+      {/* {pageButtons} */}
+      {nextPage && <button onClick={nextPage}>Next</button>}
+    </div>
+  );
+};
+export default Pagination;
+
+
+
+____________________________
+z pliku App.js
+____________________________
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import Character from "./components/Character";
@@ -9,12 +37,9 @@ function App(props) {
   const [currentPageUrl, setCurrentPageUrl] = useState(
     "https://rickandmortyapi.com/api/character"
   );
-
   const [nextPageUrl, setNextPageUrl] = useState();
   const [prevPageUrl, setPrevPageUrl] = useState();
   const [pages, setPages] = useState();
-
-  const [isSixPage, setIsSixPage] = useState(false);
 
   useEffect(() => {
     const url = currentPageUrl;
@@ -33,26 +58,14 @@ function App(props) {
 
   function nextPage() {
     setCurrentPageUrl(nextPageUrl);
-    checkIsSix();
   }
   function prevPage() {
     setCurrentPageUrl(prevPageUrl);
-    checkIsSix();
   }
-
-  function checkIsSix() {
-    if (nextPageUrl === "https://rickandmortyapi.com/api/character?page=6") {
-      setIsSixPage(true);
-    } else {
-      setIsSixPage(false);
-    }
-  }
-
   function goToPage(num) {
     setCurrentPageUrl(`https://rickandmortyapi.com/api/character?page=${num}`);
   }
   if (loading) return "Loading...";
-
   const charList = characters.map((char) => (
     <Character
       key={Math.floor(Math.random() * 10000)}
@@ -61,13 +74,8 @@ function App(props) {
     />
   ));
 
-  const Napis = () => {
-    return isSixPage ? <h1>szostka</h1> : <h1></h1>;
-  };
-
   return (
     <div className="App">
-      <Napis />
       <Pagination
         nextPage={nextPageUrl ? nextPage : null}
         prevPage={prevPageUrl ? prevPage : null}
@@ -75,6 +83,12 @@ function App(props) {
         pages={pages}
       />
       <div className="char-cards">{charList}</div>
+      <Pagination
+        nextPage={nextPageUrl ? nextPage : null}
+        prevPage={prevPageUrl ? prevPage : null}
+        goToPage={goToPage}
+        pages={pages}
+      />
     </div>
   );
 }
