@@ -9,7 +9,7 @@ const Pagination = ({ nextPage, prevPage, goToPage, pages }) => {
     );
   }
   return (
-    <div>
+    <div class="buttons">
       {prevPage && <button onClick={prevPage}>Previous</button>}
       {/* {pageButtons} */}
       {nextPage && <button onClick={nextPage}>Next</button>}

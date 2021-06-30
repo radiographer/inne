@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Character from "./components/Character";
 import Pagination from "./components/Pagination";
 
-function App(props) {
+function App() {
   const [loading, setLoading] = useState(true);
   const [characters, setCharacters] = useState([]);
   const [currentPageUrl, setCurrentPageUrl] = useState(
@@ -13,8 +13,6 @@ function App(props) {
   const [nextPageUrl, setNextPageUrl] = useState();
   const [prevPageUrl, setPrevPageUrl] = useState();
   const [pages, setPages] = useState();
-
-  const [isSixPage, setIsSixPage] = useState(false);
 
   useEffect(() => {
     const url = currentPageUrl;
@@ -33,19 +31,9 @@ function App(props) {
 
   function nextPage() {
     setCurrentPageUrl(nextPageUrl);
-    checkIsSix();
   }
   function prevPage() {
     setCurrentPageUrl(prevPageUrl);
-    checkIsSix();
-  }
-
-  function checkIsSix() {
-    if (nextPageUrl === "https://rickandmortyapi.com/api/character?page=6") {
-      setIsSixPage(true);
-    } else {
-      setIsSixPage(false);
-    }
   }
 
   function goToPage(num) {
@@ -61,13 +49,8 @@ function App(props) {
     />
   ));
 
-  const Napis = () => {
-    return isSixPage ? <h1>szostka</h1> : <h1></h1>;
-  };
-
   return (
     <div className="App">
-      <Napis />
       <Pagination
         nextPage={nextPageUrl ? nextPage : null}
         prevPage={prevPageUrl ? prevPage : null}
