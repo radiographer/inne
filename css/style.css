@@ -1,0 +1,26 @@
+body {
+  background-color: burlywood;
+}
+
+#div1 {
+  display: inline-flexbox;
+  height: 50 px;
+  weight: 50 px;
+  padding: 20px;
+  border: 1px solid blue;
+  background-color: rgb(255, 94, 0);
+}
+
+#div2 {
+  display: inline-flex;
+  padding: 20px;
+  border: 1px solid blue;
+  background-color: yellow;
+}
+
+#div3 {
+  display: inline-flex;
+  padding: 20px;
+  border: 1px solid blue;
+  background-color: rgb(51, 255, 0);
+}
